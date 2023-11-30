@@ -9,10 +9,10 @@ Basic game collision detection
 
 # Media
 Game Start
-![Alt text](docs/graphics/axeGameStartGame.png)
+![Game Start](docs/graphics/axeGameStartGame.png)
 
 Game Over
-![Game Over](docs/graphics/axeGameStartGame.png)
+![Game Over](docs/graphics/axeGameGameOver.png)
 
 Video Demo
 

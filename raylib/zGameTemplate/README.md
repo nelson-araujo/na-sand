@@ -1,6 +1,5 @@
 # Game folder structure
-[Game Dev Discussion - How to structure files in a project?](https://www.youtube.com/watch?v=iZxfFzs-N7Y)
-https://blog.bitbebop.com/gamedev-file-structure/
+<summary>
 
 |-- assets/
 |  |-- art/
@@ -19,8 +18,13 @@ https://blog.bitbebop.com/gamedev-file-structure/
 |     |-- music/
 |     |-- sound/
 |
+|-- docs/
+|  |-- design/
+|  |-- media/
+|  |-- manuals/
+|
 |-- src/
-|  |-- lib/
+|  |-- libs/
 |  |-- main.cpp
 |
 |-- .github/
@@ -29,3 +33,17 @@ https://blog.bitbebop.com/gamedev-file-structure/
 |-- build.sh
 |-- README.md
 |-- .gitignore
+
+# Dependencies
+
+
+# Media
+Game Start
+![Alt text](docs/graphics/axeGameStartGame.png)
+
+Game Over
+![Game Over](docs/graphics/axeGameGameOver.png)
+
+Video Demo
+
+[![Video Demo](https://img.youtube.com/vi/<ID-NUMBER-HERE>/0.jpg)](https://www.youtube.com/watch?v=<ID-NUMBER-HERE>)
