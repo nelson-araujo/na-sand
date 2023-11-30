@@ -5,10 +5,12 @@ Basic game collision detection
 [udemy: C++ Fundamentals: Game Programming For Beginners](https://www.udemy.com/course/cpp-fundamentals/)
 
 # Media
-![Axe Game: axeGame001](docs/graphics/axeGame001.png)
+Game Start
+![Alt text](docs/graphics/axeGameStartGame.png)
 
 Game Over
-![Axe Game: Game Over](docs/graphics/axeGameGameOver.png)
+![Game Over](docs/graphics/axeGameStartGame.png)
 
-YouTube Demo
-[![Axe Game: YouTube Video Demo](https://img.youtube.com/vi/G0WSqLFCUjM/0.jpg)](https://www.youtube.com/watch?v=G0WSqLFCUjM)
+Video Demo
+
+[![Video Demo](https://img.youtube.com/vi/G0WSqLFCUjM/0.jpg)](https://www.youtube.com/watch?v=G0WSqLFCUjM)
