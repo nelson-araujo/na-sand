@@ -1,6 +1,9 @@
 # Axe Game
 Basic game collision detection
 
+# Dependencies
+[raylib](https://www.raylib.com/)
+
 # Resources
 [udemy: C++ Fundamentals: Game Programming For Beginners](https://www.udemy.com/course/cpp-fundamentals/)
 
