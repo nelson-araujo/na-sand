@@ -1,5 +1,7 @@
 # Axe Game
-Basic game collision detection.
+Basic game collision detection. Tutorial follow along.
+
+Tutorial follow along
 
 ## Dependencies
 [raylib](https://www.raylib.com/)

@@ -10,16 +10,16 @@
 const int WIN_W{512}; // Window Width
 const int WIN_H{380}; // Window Height
 const int FPS{60}; // Game FPS
-const int PLAYER_W{50}; // Player width
-const int PLAYER_H{80}; // Player height
-const int PLAYER_BASE_SPEED{2}; // Player movement speed
+// const int PLAYER_W{50}; // Player width
+// const int PLAYER_H{80}; // Player height
+// const int PLAYER_BASE_SPEED{2}; // Player movement speed
 
 
 // Prototypes
 void startGame();
 // void displayPlayer(int*, int*);
 void displayPlayer(Player*);
-void updatePlayerCtr(int*, int*);
+void updatePlayerCtr(Player*);
 void closeGame();
 
 /** Game entry point.
@@ -28,21 +28,18 @@ void closeGame();
 int main(){
     Player player;
 
-
     startGame();
 
     // Player position
-    int playerPosX{0};
-    int playerPosY{WIN_H - PLAYER_H};
+    player.posX = 0;
+    player.posY = WIN_H - player.HEIGHT;
 
     while( !WindowShouldClose() ){
         BeginDrawing();
         ClearBackground(WHITE);
 
-        // updatePlayerCtr(&playerPosX, &playerPosY);
+        updatePlayerCtr(&player);
         displayPlayer(&player);
-        
-
 
         EndDrawing();
     }
@@ -67,8 +64,8 @@ void closeGame(){
 }
 
 /** Display player.
- * @param   playerPosX    Pointer to player x position on window.
- * @param   playerPosY    Pointer to player y position on window.
+ * @param   player object
+ * @return  void
 */
 void displayPlayer(Player* player){
     DrawRectangle(player->posX, player->posY, player->WIDTH, player->HEIGHT, BLACK);
@@ -78,13 +75,18 @@ void displayPlayer(Player* player){
  * @param   playerPosX    Pointer to player x position on window.
  * @param   playerPosY    Pointer to player y position on window.
 */
-void updatePlayerCtr(int* playerPosX, int* playerPosY){
+void updatePlayerCtr(Player* player){
     // Movement
-    if(IsKeyDown(KEY_RIGHT)){ *playerPosX += PLAYER_BASE_SPEED; };
-    if(IsKeyDown(KEY_LEFT)){ *playerPosX -= PLAYER_BASE_SPEED; };
+    if( IsKeyDown(KEY_RIGHT) ){ player->posX += player->speed; };
+    if( IsKeyDown(KEY_LEFT) ){ player->posX -= player->speed; };
 
     // Jump
-    if(IsKeyDown(KEY_SPACE)){ *playerPosX += PLAYER_BASE_SPEED; };
+    if( IsKeyPressed(KEY_SPACE) ){
+        player->posY -= player->JUMP_HEIGHT;
+    };
     
-
+    if( IsKeyReleased(KEY_SPACE) ){
+        player->posY += player->JUMP_HEIGHT;
+    };
+    
 }
