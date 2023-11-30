@@ -1,4 +1,4 @@
-# Game folder structure
+# <project-name>
 <summary>
 
 |-- assets/
@@ -34,15 +34,15 @@
 |-- README.md
 |-- .gitignore
 
-# Dependencies
+## Dependencies
 
 
-# Media
+## Media
 Game Start
-![Alt text](docs/graphics/axeGameStartGame.png)
+
 
 Game Over
-![Game Over](docs/graphics/axeGameGameOver.png)
+
 
 Video Demo
 
