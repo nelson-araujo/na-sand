@@ -10,14 +10,11 @@
 const int WIN_W{512}; // Window Width
 const int WIN_H{380}; // Window Height
 const int FPS{60}; // Game FPS
-// const int PLAYER_W{50}; // Player width
-// const int PLAYER_H{80}; // Player height
-// const int PLAYER_BASE_SPEED{2}; // Player movement speed
 
 
 // Prototypes
 void startGame();
-// void displayPlayer(int*, int*);
+
 void displayPlayer(Player*);
 void updatePlayerCtr(Player*);
 void closeGame();
@@ -86,7 +83,7 @@ void updatePlayerCtr(Player* player){
     };
     
     if( IsKeyReleased(KEY_SPACE) ){
-        player->posY += player->JUMP_HEIGHT;
+        player->posY += player->JUMP_HEIGHT; 
     };
     
 }
