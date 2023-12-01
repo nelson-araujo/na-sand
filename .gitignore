@@ -1,3 +1,6 @@
+# Ignore .out
+*.out
+
 # Created by https://www.toptal.com/developers/gitignore/api/clion,windows,linux,visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=clion,windows,linux,visualstudio
 

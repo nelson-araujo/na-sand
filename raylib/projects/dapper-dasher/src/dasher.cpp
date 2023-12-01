@@ -99,6 +99,7 @@ void isFalling(Player* player){
             player->posY += player->fallVelocity;
         } else {
             player->posY = (WIN_H - player->HEIGHT);
+            player->fallVelocity = 0;
             player->isFalling = false;
         }
         
