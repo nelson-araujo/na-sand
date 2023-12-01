@@ -78,8 +78,9 @@ void updatePlayerCtr(Player* player){
     if( IsKeyDown(KEY_LEFT) ){ player->posX -= player->speed; };
 
     // Jump
-    if( IsKeyPressed(KEY_SPACE) ){
+    if( IsKeyPressed(KEY_SPACE) && !player->isFalling ){
         player->posY -= player->JUMP_HEIGHT;
+        player->speed += player->BASE_SPEED * 2;
         player->isFalling = true;
     };
     
@@ -99,6 +100,7 @@ void isFalling(Player* player){
             player->posY += player->fallVelocity;
         } else {
             player->posY = (WIN_H - player->HEIGHT);
+            player->speed = player->BASE_SPEED;
             player->fallVelocity = 0;
             player->isFalling = false;
         }

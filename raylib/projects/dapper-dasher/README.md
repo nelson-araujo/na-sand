@@ -24,6 +24,6 @@ Game Start
 Game Over
 
 
-Video Demo
+Video: Jump rigging (2023-12-01)
 
-[![Video Demo](https://img.youtube.com/vi/<ID-NUMBER-HERE>/0.jpg)](https://www.youtube.com/watch?v=<ID-NUMBER-HERE>)
+[![Jump rigging](https://img.youtube.com/vi/9um7U0BenkY/0.jpg)](https://www.youtube.com/watch?v=9um7U0BenkY)
