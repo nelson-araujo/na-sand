@@ -3,21 +3,22 @@
  * 
 */
 
-#include "include/raylib.h"
-#include "include/player.h"
+#include "libs/raylib.h"
+#include "player.h"
 
 // Globals
 const int WIN_W{512}; // Window Width
 const int WIN_H{380}; // Window Height
-const int FPS{60}; // Game FPS
+const int FPS{30}; // Game FPS
+const int GRAVITY{1}; // Free fall gravity (pixels/frame)/frame)
 
 
 // Prototypes
 void startGame();
-
 void displayPlayer(Player*);
 void updatePlayerCtr(Player*);
 void closeGame();
+void isFalling(Player*);
 
 /** Game entry point.
  * 
@@ -69,8 +70,7 @@ void displayPlayer(Player* player){
 }
 
 /** Update player controls
- * @param   playerPosX    Pointer to player x position on window.
- * @param   playerPosY    Pointer to player y position on window.
+ * @param   player  player object
 */
 void updatePlayerCtr(Player* player){
     // Movement
@@ -80,10 +80,28 @@ void updatePlayerCtr(Player* player){
     // Jump
     if( IsKeyPressed(KEY_SPACE) ){
         player->posY -= player->JUMP_HEIGHT;
+        player->isFalling = true;
     };
     
-    if( IsKeyReleased(KEY_SPACE) ){
-        player->posY += player->JUMP_HEIGHT; 
-    };
+    // Check if player is higher than floor height and apply gravity
+    if(player->isFalling){ isFalling(player); }
     
+}
+
+/** Player is falling, update position.
+ * @param   player  player object
+*/
+void isFalling(Player* player){
+        const int TERMINAL_VELOCITY{53};
+
+        // Update player position
+        if(player->posY < (WIN_H - player->HEIGHT) ){
+            player->posY += player->fallVelocity;
+        } else {
+            player->posY = (WIN_H - player->HEIGHT);
+            player->isFalling = false;
+        }
+        
+        // Update player fall velocity
+        player->fallVelocity += GRAVITY;
 }
