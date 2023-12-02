@@ -10,28 +10,26 @@
 const int WIN_W{512}; // Window Width
 const int WIN_H{380}; // Window Height
 const int FPS{30}; // Game FPS
-const int GRAVITY{1}; // Free fall gravity (pixels/frame)/frame)
+// const int GRAVITY{1}; // Free fall gravity (pixels/frame)/frame)
+const int GRAVITY{1'000}; // Free fall gravity (pixels/second)/second). ' is ignored by the compiler but makes it easier to read.
 
 
 // Prototypes
-void startGame();
+Player startGame();
 void displayPlayer(Player*);
 void updatePlayerCtr(Player*);
-void closeGame();
+void closeGame(Player*);
 void isFalling(Player*);
 
 /** Game entry point.
  * 
 */
 int main(){
-    Player player;
+    
+    // Start game and create player
+    Player player = startGame();
 
-    startGame();
-
-    // Player position
-    player.posX = 0;
-    player.posY = WIN_H - player.HEIGHT;
-
+    // Game loop
     while( !WindowShouldClose() ){
         BeginDrawing();
         ClearBackground(WHITE);
@@ -42,22 +40,35 @@ int main(){
         EndDrawing();
     }
 
-    closeGame();
+    closeGame(&player);
 }
 
 /** Start game window.
  * @return void
 */
-void startGame(){
+Player startGame(){
     InitWindow(WIN_W, WIN_H, "Dapper Dasher!");
+    
+    // Create the player
+    Player player;
+    player.pos.x = 0;
+    player.pos.y = WIN_H - player.HEIGHT;
+    player.speed = player.BASE_SPEED;
+    player.texture = LoadTexture("../assets/art/entities/scarfy/scarfy.png");
 
+    // Set the games FPS
     SetTargetFPS(FPS);
+
+    return player;
 }
 
 /** Close game window.
  * @return void
 */
-void closeGame(){
+void closeGame(Player* player){
+    // Clear texture from memory
+    UnloadTexture(player->texture);
+    
     CloseWindow();
 }
 
@@ -66,21 +77,25 @@ void closeGame(){
  * @return  void
 */
 void displayPlayer(Player* player){
-    DrawRectangle(player->posX, player->posY, player->WIDTH, player->HEIGHT, BLACK);
+    // DrawRectangle(player->pos.x, player->pos.y, player->WIDTH, player->HEIGHT, BLACK);
+    DrawTextureRec(player->texture, player->textureRec, player->pos, WHITE);
 }
 
 /** Update player controls
  * @param   player  player object
 */
 void updatePlayerCtr(Player* player){
+    // Deta time, time since last frame.
+    float dT = GetFrameTime();
+
     // Movement
-    if( IsKeyDown(KEY_RIGHT) ){ player->posX += player->speed; };
-    if( IsKeyDown(KEY_LEFT) ){ player->posX -= player->speed; };
+    if( IsKeyDown(KEY_RIGHT) ){ player->pos.x += (player->speed * dT); };
+    if( IsKeyDown(KEY_LEFT) ){ player->pos.x -= (player->speed * dT); };
 
     // Jump
     if( IsKeyPressed(KEY_SPACE) && !player->isFalling ){
-        player->posY -= player->JUMP_HEIGHT;
-        player->speed += player->BASE_SPEED * 2;
+        player->pos.y -= player->JUMP_HEIGHT;
+        // player->speed += player->BASE_SPEED * 2; // Increase speed when jumping
         player->isFalling = true;
     };
     
@@ -95,16 +110,19 @@ void updatePlayerCtr(Player* player){
 void isFalling(Player* player){
         const int TERMINAL_VELOCITY{53};
 
+        // Get delta time, time since last frame.
+        float dT = GetFrameTime();
+
         // Update player position
-        if(player->posY < (WIN_H - player->HEIGHT) ){
-            player->posY += player->fallVelocity;
+        if(player->pos.y < (WIN_H - player->HEIGHT) ){
+            player->pos.y += (player->fallVelocity * dT);
         } else {
-            player->posY = (WIN_H - player->HEIGHT);
+            player->pos.y = (WIN_H - player->HEIGHT);
             player->speed = player->BASE_SPEED;
             player->fallVelocity = 0;
             player->isFalling = false;
         }
         
         // Update player fall velocity
-        player->fallVelocity += GRAVITY;
+        player->fallVelocity += (GRAVITY * dT);
 }
