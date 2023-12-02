@@ -25,8 +25,7 @@ void isFalling(Player*);
  * 
 */
 int main(){
-    
-    // Start game and create player
+    // Start game and display player
     Player player = startGame();
 
     // Game loop
@@ -77,8 +76,35 @@ void closeGame(Player* player){
  * @return  void
 */
 void displayPlayer(Player* player){
-    // DrawRectangle(player->pos.x, player->pos.y, player->WIDTH, player->HEIGHT, BLACK);
-    DrawTextureRec(player->texture, player->textureRec, player->pos, WHITE);
+    // Delta Time, time since last frame.
+    float dT = GetFrameTime();
+
+
+    // float runningTime{player->UPDATE_TIME};
+    
+    // Animate player
+    if(player->isMoving){
+        if(player->runningTime >= player->UPDATE_TIME){
+            int playerFrame = 1;
+            
+            // Reset running time
+            player->runningTime = 0;
+
+            if(playerFrame <= 6){
+                player->textureFrame.x += (playerFrame * player->WIDTH);
+                playerFrame++;
+            } else {
+                playerFrame = 0;
+            }
+        }
+    } else {
+        player->textureFrame.x = 5 * player->WIDTH;
+    }
+
+    DrawTextureRec(player->texture, player->textureFrame, player->pos, WHITE);
+
+    // Increase running time
+    player->runningTime += dT;
 }
 
 /** Update player controls
@@ -89,8 +115,19 @@ void updatePlayerCtr(Player* player){
     float dT = GetFrameTime();
 
     // Movement
-    if( IsKeyDown(KEY_RIGHT) ){ player->pos.x += (player->speed * dT); };
-    if( IsKeyDown(KEY_LEFT) ){ player->pos.x -= (player->speed * dT); };
+    if( IsKeyDown(KEY_RIGHT) ){
+        player->isMoving = true;
+        player->pos.x += (player->speed * dT);
+    }
+
+    if( IsKeyDown(KEY_LEFT) ){
+        player->isMoving = true;
+        player->pos.x -= (player->speed * dT);
+    }
+
+    if( IsKeyUp(KEY_RIGHT) && IsKeyUp(KEY_LEFT) ){
+        player->isMoving = false;
+    }
 
     // Jump
     if( IsKeyPressed(KEY_SPACE) && !player->isFalling ){
