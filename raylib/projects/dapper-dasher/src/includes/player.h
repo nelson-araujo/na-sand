@@ -1,5 +1,7 @@
-#ifndef PLAYER
-#define PLAYER
+#ifndef PLAYER_H // Load header if not defined already.
+#define PLAYER_H // If not defined, define it with the below code.
+
+#include "raylib.h"
 
 class Player{
     private:
@@ -17,10 +19,10 @@ class Player{
 
         // Texture frame
         Rectangle textureFrame{
-            .x{0},
-            .y{0},
-            .width{WIDTH},
-            .height{HEIGHT}
+            .x{0.0},
+            .y{0.0},
+            .width{float(WIDTH)},
+            .height{float(HEIGHT)}
         };
         
         // Position on screen
@@ -35,4 +37,5 @@ class Player{
         int fallVelocity{0}; // Speed the player is failling
         int speed{0}; // Speed of player, initialized in loop to BASE_SPEED
 };
-#endif
+
+#endif // End if block

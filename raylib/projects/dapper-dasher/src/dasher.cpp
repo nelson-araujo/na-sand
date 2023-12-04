@@ -3,72 +3,84 @@
  * 
 */
 
-#include "libs/raylib.h"
-#include "player.h"
+#include "includes/raylib.h"
+#include "includes/player.h"
+#include "includes/nebula.h"
 
 // Globals
 const int WIN_W{512}; // Window Width
 const int WIN_H{380}; // Window Height
 const int FPS{30}; // Game FPS
-// const int GRAVITY{1}; // Free fall gravity (pixels/frame)/frame)
 const int GRAVITY{1'000}; // Free fall gravity (pixels/second)/second). ' is ignored by the compiler but makes it easier to read.
 
-
 // Prototypes
-Player startGame();
+void initializeWindow();
+Player createPlayer();
+Nebula createNebula();
 void displayPlayer(Player*);
-void updatePlayerCtr(Player*);
-void closeGame(Player*);
-void isFalling(Player*);
+void playerCtr(Player*);
+void isPlayerFalling(Player*);
+void displayNebula(Nebula*);
+void closeGame(Player*, Nebula*);
 
 /** Game entry point.
  * 
 */
 int main(){
     // Start game and display player
-    Player player = startGame();
+    initializeWindow();
+
+    Player player = createPlayer();
+    Nebula nebula = createNebula();
 
     // Game loop
     while( !WindowShouldClose() ){
         BeginDrawing();
         ClearBackground(WHITE);
 
-        updatePlayerCtr(&player);
+        playerCtr(&player);
         displayPlayer(&player);
+        displayNebula(&nebula);
 
         EndDrawing();
     }
 
-    closeGame(&player);
+    closeGame(&player, &nebula);
 }
 
-/** Start game window.
+/** Initialize the game window.
  * @return void
 */
-Player startGame(){
+void initializeWindow(){
     InitWindow(WIN_W, WIN_H, "Dapper Dasher!");
     
-    // Create the player
+    // Set the games FPS
+    SetTargetFPS(FPS);
+}
+
+/** Create player object.
+ * @return  Player object
+*/
+Player createPlayer(){
     Player player;
     player.pos.x = 0;
     player.pos.y = WIN_H - player.HEIGHT;
     player.speed = player.BASE_SPEED;
     player.texture = LoadTexture("../assets/art/entities/scarfy/scarfy.png");
 
-    // Set the games FPS
-    SetTargetFPS(FPS);
-
     return player;
 }
 
-/** Close game window.
- * @return void
+/** Create a nebula
+ * @return  Nebula object
 */
-void closeGame(Player* player){
-    // Clear texture from memory
-    UnloadTexture(player->texture);
-    
-    CloseWindow();
+Nebula createNebula(){
+    Nebula nebula;
+    nebula.texture = LoadTexture("../assets/art/entities/nebula/nebula_spritesheet.png");
+    nebula.pos.x = float(WIN_W - nebula.WIDTH);
+    nebula.pos.y = float(WIN_H - nebula.HEIGHT);
+
+    return nebula;
 }
 
 /** Display player.
@@ -78,9 +90,6 @@ void closeGame(Player* player){
 void displayPlayer(Player* player){
     // Delta Time, time since last frame.
     float dT = GetFrameTime();
-
-
-    // float runningTime{player->UPDATE_TIME};
     
     // Animate player
     if(player->isMoving){
@@ -110,7 +119,7 @@ void displayPlayer(Player* player){
 /** Update player controls
  * @param   player  player object
 */
-void updatePlayerCtr(Player* player){
+void playerCtr(Player* player){
     // Deta time, time since last frame.
     float dT = GetFrameTime();
 
@@ -137,14 +146,14 @@ void updatePlayerCtr(Player* player){
     };
     
     // Check if player is higher than floor height and apply gravity
-    if(player->isFalling){ isFalling(player); }
+    if(player->isFalling){ isPlayerFalling(player); }
     
 }
 
 /** Player is falling, update position.
  * @param   player  player object
 */
-void isFalling(Player* player){
+void isPlayerFalling(Player* player){
         const int TERMINAL_VELOCITY{53};
 
         // Get delta time, time since last frame.
@@ -162,4 +171,50 @@ void isFalling(Player* player){
         
         // Update player fall velocity
         player->fallVelocity += (GRAVITY * dT);
+}
+
+/** Display nebula
+ * @param   Nebula object to display
+*/
+void displayNebula(Nebula* nebula){
+    float dT = GetFrameTime();
+
+    // Animate nebula
+    if(nebula->runningTime >= nebula->UPDATE_TIME){
+        int frame = 1;
+        
+        // Reset running time
+        nebula->runningTime = 0;
+
+        if(frame <= (nebula->texture.width / nebula->SPRITE_SHEET_HOR_FRAMES)){
+            nebula->textureFrame.x += (frame * nebula->WIDTH);
+            frame++;
+        } else {
+            frame = 0;
+        }
+    }
+
+    // increate run time
+    nebula->runningTime += dT;
+
+    // Update position
+    if(nebula->pos.x > (0 - nebula->WIDTH)){
+        nebula->pos.x -= nebula->SPEED * dT;
+    } else {
+        nebula->pos.x = WIN_W;
+    }
+
+    // display nebula
+    DrawTextureRec(nebula->texture, nebula->textureFrame, nebula->pos, WHITE);
+}
+
+/** Close game window.
+ * @return void
+*/
+void closeGame(Player* player, Nebula* nebula){
+    // Clear texture from memory
+    UnloadTexture(player->texture);
+    UnloadTexture(nebula->texture);
+    
+    CloseWindow();
 }
