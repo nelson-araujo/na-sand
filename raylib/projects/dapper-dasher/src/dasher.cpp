@@ -93,18 +93,23 @@ void displayPlayer(Player* player){
     
     // Animate player
     if(player->isMoving){
-        if(player->runningTime >= player->UPDATE_TIME){
-            int playerFrame = 1;
-            
-            // Reset running time
-            player->runningTime = 0;
+        // Set animation frame if player is running or jumping
+        if(!player->isInAir){
+            if(player->runningTime >= player->UPDATE_TIME){
+                int playerFrame = 1;
+                
+                // Reset running time
+                player->runningTime = 0;
 
-            if(playerFrame <= 6){
-                player->textureFrame.x += (playerFrame * player->WIDTH);
-                playerFrame++;
-            } else {
-                playerFrame = 0;
+                if(playerFrame <= 6){
+                    player->textureFrame.x += (playerFrame * player->WIDTH);
+                    playerFrame++;
+                } else {
+                    playerFrame = 0;
+                }
             }
+        } else {
+            player->textureFrame.x = 0 * player->WIDTH;
         }
     } else {
         player->textureFrame.x = 5 * player->WIDTH;
@@ -139,14 +144,14 @@ void playerCtr(Player* player){
     }
 
     // Jump
-    if( IsKeyPressed(KEY_SPACE) && !player->isFalling ){
+    if( IsKeyPressed(KEY_SPACE) && !player->isInAir ){
         player->pos.y -= player->JUMP_HEIGHT;
         // player->speed += player->BASE_SPEED * 2; // Increase speed when jumping
-        player->isFalling = true;
+        player->isInAir = true;
     };
     
     // Check if player is higher than floor height and apply gravity
-    if(player->isFalling){ isPlayerFalling(player); }
+    if(player->isInAir){ isPlayerFalling(player); }
     
 }
 
@@ -166,7 +171,7 @@ void isPlayerFalling(Player* player){
             player->pos.y = (WIN_H - player->HEIGHT);
             player->speed = player->BASE_SPEED;
             player->fallVelocity = 0;
-            player->isFalling = false;
+            player->isInAir = false;
         }
         
         // Update player fall velocity

@@ -3,15 +3,15 @@
 
 #include "raylib.h"
 
-// Using struct as all code will be public
+// Using struct as all variables will be public
 struct Nebula{
     // const int WIDTH{100};
     const int WIDTH{100};
     const int HEIGHT{100};
     const int SPEED{100};
     const float UPDATE_TIME{1.0/12.0}; // Ammount of time that should pass between each animation frame. 1/12 will update the frame 12 times per second.
-    const int SPRITE_SHEET_HOR_FRAMES{8}; // Number of frames in the sprite sheet
-    const int SPRITE_SHEET_VER_FRAMES{8};
+    const int SPRITE_SHEET_HOR_FRAMES{8}; // Number of horizontal frames in the sprite sheet
+    const int SPRITE_SHEET_VER_FRAMES{8}; // Number of row frames in the sprite sheet
 
 
     // Texture sprite sheet. Must be loaded after the Window is created.
