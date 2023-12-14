@@ -30,7 +30,7 @@ struct Nebula{
         .y{0.0}
     };
     
-    float runningTime{0};
+    // float runningTime{0}; // deprecated
 };
 
 #endif // End define block

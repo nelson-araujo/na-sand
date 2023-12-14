@@ -3,12 +3,6 @@
  * 
 */
 
-// TODO: Complete: Display nebulae
-// TODO: Add: Nebulae only move when player is half a screen or less close to them.
-// TODO: Add: Prevent player from being back a screen
-// TODO: Add: Reverse player exture when moving back
-// TODO: Add: Logging (spdlog: https://github.com/gabime/spdlog)
-
 #include "includes/raylib.h"
 #include "includes/player.h"
 #include "includes/nebula.h"
@@ -21,23 +15,27 @@ const int WIN_H{380}; // Window Height
 const int FPS{30}; // Game FPS
 const int GRAVITY{1'000}; // Free fall gravity (pixels/second)/second). ' is ignored by the compiler but makes it easier to read.
 const int TOTAL_NEBULAE{2}; // Total ammount of nebulas to display
+const float UPDATE_TIME{1.0/12.0}; // Ammount of time that should pass between each animation frame. 1/12 will update the frame 12 times per second.
+float runningTime{0};
 
 // Prototypes
 void initializeWindow();
 Player createPlayer();
-Nebula createNebula();
+// Nebula createNebula(); // FIXME: DEPRECATED
 void createNebulae(Nebula*);
 void displayPlayer(Player*);
 void playerCtr(Player*);
 void isPlayerFalling(Player*);
 void displayNebula(Nebula*);
 void displayNebulae(Nebula*);
-void closeGame(Player*, Nebula*, Nebula*);
+void closeGame(Player*, Nebula*);
 
 /** Game entry point.
  * 
 */
 int main(){
+    srand(time(NULL)); // seed random number generator
+
     // Start game and display player
     initializeWindow();
     
@@ -49,7 +47,7 @@ int main(){
 
     
     // Create a single nebula
-    Nebula nebula = createNebula();
+    // Nebula nebula = createNebula(); // FIXME: DEPRECATED
 
 
     // Game loop
@@ -59,13 +57,13 @@ int main(){
 
         playerCtr(&player);
         displayPlayer(&player);
-        displayNebula(&nebula);
+        // displayNebula(&nebula); // FIXME: DEPRECATED
         displayNebulae(nebulae);
 
         EndDrawing();
     }
 
-    closeGame(&player, &nebula, nebulae);
+    closeGame(&player, nebulae);
 }
 
 /** Initialize the game window.
@@ -91,6 +89,7 @@ Player createPlayer(){
     return player;
 }
 
+// FIXME: DEPRECATED
 /** Create a nebula
  * @return  Nebula object
 */
@@ -113,7 +112,7 @@ void createNebulae(Nebula* nebulae){
 
     for(int i=0 ; i<TOTAL_NEBULAE ; i++){
         nebulae[i].texture = LoadTexture("../assets/art/entities/nebula/nebula_spritesheet.png");
-        int randPos = rand() % WIN_W; // Random position
+        int randPos = rand() % (WIN_W/2); // Random position
 
         nebulae[i].pos.x = float( WIN_W + randPos); // Place nebula outside view
         nebulae[i].pos.y = float(WIN_H - nebulae[i].HEIGHT);
@@ -215,55 +214,96 @@ void isPlayerFalling(Player* player){
         player->fallVelocity += (GRAVITY * dT);
 }
 
+// FIXME: DEPRECATED 
 /** Display nebula
  * @param   Nebula object to display
 */
-void displayNebula(Nebula* nebula){
-    float dT = GetFrameTime();
+// void displayNebula(Nebula* nebula){
+//     float dT = GetFrameTime();
 
-    // Animate nebula
-    if(nebula->runningTime >= nebula->UPDATE_TIME){
-        int frame = 1;
+//     // Animate nebula
+//     if(nebula->runningTime >= nebula->UPDATE_TIME){
+//         int frame = 1;
         
-        // Reset running time
-        nebula->runningTime = 0;
+//         // Reset running time
+//         nebula->runningTime = 0;
 
-        if(frame <= (nebula->texture.width / nebula->SPRITE_SHEET_HOR_FRAMES)){
-            nebula->textureFrame.x += (frame * nebula->WIDTH);
-            frame++;
-        } else {
-            frame = 0;
-        }
-    }
+//         if(frame <= (nebula->texture.width / nebula->SPRITE_SHEET_HOR_FRAMES)){
+//             nebula->textureFrame.x += (frame * nebula->WIDTH);
+//             frame++;
+//         } else {
+//             frame = 0;
+//         }
+//     }
 
-    // increate run time
-    nebula->runningTime += dT;
+//     // increate run time
+//     nebula->runningTime += dT;
 
-    // Update position
-    if(nebula->pos.x > (0 - nebula->WIDTH)){
-        nebula->pos.x -= nebula->SPEED * dT;
-    } else {
-        nebula->pos.x = WIN_W;
-    }
+//     // Update position
+//     if(nebula->pos.x > (0 - nebula->WIDTH)){
+//         nebula->pos.x -= nebula->SPEED * dT;
+//     } else {
+//         nebula->pos.x = WIN_W;
+//     }
 
-    // display nebula
-    DrawTextureRec(nebula->texture, nebula->textureFrame, nebula->pos, WHITE);
-}
+//     // display nebula
+//     DrawTextureRec(nebula->texture, nebula->textureFrame, nebula->pos, WHITE);
+// }
 
 /** Display nebulae.
  * @param   Nebula* Array of nebulas
 */
 void displayNebulae(Nebula* nebulae){
-    //TODO: Create function
+    float dT = GetFrameTime();
+    // srand(time(NULL)); // seed random number generator
+    
+        /**
+         * Check if a specific ammount of time has passed(UPDATE_TIME) since the last update (runningTime).
+         * This prevents animation and movements from being slow or fast based on the speed of the computer.
+        */
+        if(runningTime >= UPDATE_TIME){
+            int frame = 1;
+
+            // Reset running time
+            runningTime = 0;
+
+            for(int i=0 ; i<TOTAL_NEBULAE ; i++){
+                if(frame <= (nebulae[i].texture.width / nebulae[i].SPRITE_SHEET_HOR_FRAMES)){
+                    nebulae[i].textureFrame.x += (frame * nebulae[i].WIDTH);
+                    frame++;
+                } else {
+                    frame = 0;
+                }
+            }
+        }
+
+        // increate run time
+        runningTime += dT;
+
+        // Update position
+        for(int i=0 ; i<TOTAL_NEBULAE ; i++){
+            if(nebulae[i].pos.x > (0 - nebulae[i].WIDTH)){
+                nebulae[i].pos.x -= nebulae[i].SPEED * dT;
+            } else {
+                int randPos = rand() % (WIN_W/2);
+
+                nebulae[i].pos.x = float( WIN_W + randPos); // Place nebula outside view
+            }
+        }
+
+        // display nebula
+        for(int i=0 ; i<TOTAL_NEBULAE ; i++){
+            DrawTextureRec(nebulae[i].texture, nebulae[i].textureFrame, nebulae[i].pos, WHITE);
+        }
 }
 
 /** Close game window.
  * @return void
 */
-void closeGame(Player* player, Nebula* nebula, Nebula* nebulae){
+void closeGame(Player* player, Nebula* nebulae){
     // Clear textures from memory
     UnloadTexture(player->texture);
-    UnloadTexture(nebula->texture);
+    // UnloadTexture(nebula->texture); // FIXME: DEPRECATED
 
     for(int i=0 ; i<TOTAL_NEBULAE ; i++){
         UnloadTexture(nebulae[i].texture);
