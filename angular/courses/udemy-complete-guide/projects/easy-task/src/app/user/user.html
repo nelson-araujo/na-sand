@@ -1,0 +1,30 @@
+<div>
+<!--  Inline calculation of path -->
+<!--  <button>-->
+<!--    <img-->
+<!--      [src]="'assets/users/' + selectedUser.avatar"-->
+<!--      [alt]="selectedUser.name"-->
+<!--    />-->
+<!--    <span>{{ selectedUser.name}}</span>-->
+<!--  </button>-->
+
+<!--  Using zone.js -->
+<!--  <button (click)="onSelectUser()" >-->
+<!--    <img-->
+<!--      [src]="imagePath"-->
+<!--      [alt]="selectedUser.name"-->
+<!--    />-->
+<!--    <span>{{ selectedUser.name}}</span>-->
+<!--  </button>-->
+
+  <!--  Using signals -->
+  <button (click)="onSelectUser()" >
+
+    <!-- Add () to identify the variable as a signal -->
+    <img
+      [src]="imagePath()"
+      [alt]="selectedUser().name"
+    />
+    <span>{{ selectedUser().name}}</span>
+  </button>
+</div>
