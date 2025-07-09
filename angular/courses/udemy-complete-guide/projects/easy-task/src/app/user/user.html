@@ -18,13 +18,19 @@
 <!--  </button>-->
 
   <!--  Using signals -->
-  <button (click)="onSelectUser()" >
+<!--  <button (click)="onSelectUser()" >-->
 
     <!-- Add () to identify the variable as a signal -->
-    <img
-      [src]="imagePath()"
-      [alt]="selectedUser().name"
-    />
-    <span>{{ selectedUser().name}}</span>
+<!--    <img-->
+<!--      [src]="imagePath()"-->
+<!--      [alt]="selectedUser().name"-->
+<!--    />-->
+<!--    <span>{{ selectedUser().name}}</span>-->
+<!--  </button>-->
+
+  <button (click)="onSelectUser()">
+    <img [src]="imagePath()" [alt]="name()" />
+    <span>{{ name() }}</span>
   </button>
+
 </div>
