@@ -1,5 +1,6 @@
 MODULE = nelsonaraujo.com/na-sand/go/grpc/greet
-FILE = dummy.proto
+# FILE = test.proto
+FILE = greet.proto
 
 default:
 	protoc --go_out=../ --go_opt=module=$(MODULE) --go-grpc_out=../ --go-grpc_opt=module=$(MODULE) $(FILE)

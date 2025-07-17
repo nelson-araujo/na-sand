@@ -4,10 +4,10 @@ package greet;
 
 option go_package = "nelsonaraujo.com/na-sand/go/grpc/greet/proto";
 
-message Dummy {
+message Test{
   uint32 id = 1;
 }
 
-service DummyService {
+service TestService{
   // TODO
 }
