@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package simple.example;
+
+option go_package = "github.com/nelson-araujo/na-sand/go/grpc/simple-example";
+
+message Simple {
+  uint32 id = 1;
+  bool is_simple = 2;
+  string name = 3;
+  repeated int32 sample_lists = 4;
+}
