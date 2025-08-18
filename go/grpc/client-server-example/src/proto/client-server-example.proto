@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package client.server.example;
+
+option go_package = "github.com/nelson-araujo/na-sand/go/grpc/client-server-example";
+
+/* Client Status Request Message
+ * 
+*/
+message clientStatusRequestMessage {
+  string msg_datetime_utc = 1; // TODO: Convert to google.protobuf.Timestamp
+
+  // Client fields
+  bool get_client_status = 100;
+  
+  // Device fields
+  bool get_device_satus = 200;
+  string device_name = 201;
+}
+
+/* Client Status Response Message
+ *
+*/
+message clientStatusResponseMessage {
+  string msg_datetime_utc= 1; // TODO: convert to google.protobuf.Timestamp
+  
+  // Client fields
+  string client_name = 100;
+  string client_iana_timezone = 101;
+  uint32 client_uptime_minutes = 102;
+  uint32 client_cpu_use = 103;
+  uint32 client_memory_use = 104;
+  uint32 client_disk_use = 105;
+  uint32 client_net_use = 106;
+  repeated string client_status_messages = 107; // Status messages such as warnings and errors
+
+  // Device fields
+  string device_name = 200;
+  string device_iana_timezone = 201;
+  uint32 device_uptime_minutes = 202;
+  uint32 device_cpu_use = 203;
+  uint32 device_memory_use = 204;
+  uint32 device_disk_use = 205;
+  uint32 device_net_use = 206;
+  repeated string device_status_messages = 207; // Status messages such as warnings and errors
+}
+
+/* Client Status Response Sevice
+ *
+*/
+service clientStatusResponseService {
+  rpc clientStatusResponse(clientStatusRequestMessage) returns(clientStatusResponseMessage);
+}

@@ -3,8 +3,8 @@ BIN_DIR = ../bin
 PROTO_DIR = ./proto
 
 # File locations
-MODULE = github.com/na-sand/go/grpc/simple-server-client-example
-PROTO_FILE = $(PROTO_DIR)/simple-server-client-example.proto
+MODULE = github.com/nelson-araujo/na-sand/go/grpc/client-server-example
+PROTO_FILE = $(PROTO_DIR)/client-server-example.proto
 SERVER_FILE = server/server.go
 CLIENT_FILE = client/client.go
 
