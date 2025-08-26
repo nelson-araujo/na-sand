@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClientStatusResponseService_ClientStatusResponse_FullMethodName = "/client.server.example.clientStatusResponseService/clientStatusResponse"
+	ClientStatusResponseService_ClientStatusResponse_FullMethodName = "/client.server.example.ClientStatusResponseService/ClientStatusResponse"
 )
 
 // ClientStatusResponseServiceClient is the client API for ClientStatusResponseService service.
@@ -113,11 +113,11 @@ func _ClientStatusResponseService_ClientStatusResponse_Handler(srv interface{}, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ClientStatusResponseService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "client.server.example.clientStatusResponseService",
+	ServiceName: "client.server.example.ClientStatusResponseService",
 	HandlerType: (*ClientStatusResponseServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "clientStatusResponse",
+			MethodName: "ClientStatusResponse",
 			Handler:    _ClientStatusResponseService_ClientStatusResponse_Handler,
 		},
 	},

@@ -8,6 +8,9 @@ PROTO_FILE = $(PROTO_DIR)/client-server-example.proto
 SERVER_FILE = server/server.go
 CLIENT_FILE = client/client.go
 
+# Binary naming modifiers
+OS = "-linux"
+
 # Terminal text modifiers
 BOLD := $(shell tput bold)
 NORMAL := $(shell tput sgr0)
@@ -30,7 +33,7 @@ proto:
 
 # Compile the server application
 server:
-	go build -o $(BIN_DIR)/server $(SERVER_FILE)
+	go build -o $(BIN_DIR)/server$(OS) $(SERVER_FILE)
 
 # Compile the client application
 client:

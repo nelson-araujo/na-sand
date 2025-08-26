@@ -272,13 +272,13 @@ var File_proto_client_server_example_proto protoreflect.FileDescriptor
 const file_proto_client_server_example_proto_rawDesc = "" +
 	"\n" +
 	"!proto/client-server-example.proto\x12\x15client.server.example\"\xbf\x01\n" +
-	"\x1aclientStatusRequestMessage\x12(\n" +
+	"\x1aClientStatusRequestMessage\x12(\n" +
 	"\x10msg_datetime_utc\x18\x01 \x01(\tR\x0emsgDatetimeUtc\x12*\n" +
 	"\x11get_client_status\x18d \x01(\bR\x0fgetClientStatus\x12)\n" +
 	"\x10get_device_satus\x18\xc8\x01 \x01(\bR\x0egetDeviceSatus\x12 \n" +
 	"\vdevice_name\x18\xc9\x01 \x01(\tR\n" +
 	"deviceName\"\x89\x06\n" +
-	"\x1bclientStatusResponseMessage\x12(\n" +
+	"\x1bClientStatusResponseMessage\x12(\n" +
 	"\x10msg_datetime_utc\x18\x01 \x01(\tR\x0emsgDatetimeUtc\x12\x1f\n" +
 	"\vclient_name\x18d \x01(\tR\n" +
 	"clientName\x120\n" +
@@ -298,8 +298,8 @@ const file_proto_client_server_example_proto_rawDesc = "" +
 	"\x0fdevice_disk_use\x18\xcd\x01 \x01(\rR\rdeviceDiskUse\x12%\n" +
 	"\x0edevice_net_use\x18\xce\x01 \x01(\rR\fdeviceNetUse\x125\n" +
 	"\x16device_status_messages\x18\xcf\x01 \x03(\tR\x14deviceStatusMessages2\x9c\x01\n" +
-	"\x1bclientStatusResponseService\x12}\n" +
-	"\x14clientStatusResponse\x121.client.server.example.clientStatusRequestMessage\x1a2.client.server.example.clientStatusResponseMessageB@Z>github.com/nelson-araujo/na-sand/go/grpc/client-server-exampleb\x06proto3"
+	"\x1bClientStatusResponseService\x12}\n" +
+	"\x14ClientStatusResponse\x121.client.server.example.ClientStatusRequestMessage\x1a2.client.server.example.ClientStatusResponseMessageB@Z>github.com/nelson-araujo/na-sand/go/grpc/client-server-exampleb\x06proto3"
 
 var (
 	file_proto_client_server_example_proto_rawDescOnce sync.Once
@@ -315,12 +315,12 @@ func file_proto_client_server_example_proto_rawDescGZIP() []byte {
 
 var file_proto_client_server_example_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_client_server_example_proto_goTypes = []any{
-	(*ClientStatusRequestMessage)(nil),  // 0: client.server.example.clientStatusRequestMessage
-	(*ClientStatusResponseMessage)(nil), // 1: client.server.example.clientStatusResponseMessage
+	(*ClientStatusRequestMessage)(nil),  // 0: client.server.example.ClientStatusRequestMessage
+	(*ClientStatusResponseMessage)(nil), // 1: client.server.example.ClientStatusResponseMessage
 }
 var file_proto_client_server_example_proto_depIdxs = []int32{
-	0, // 0: client.server.example.clientStatusResponseService.clientStatusResponse:input_type -> client.server.example.clientStatusRequestMessage
-	1, // 1: client.server.example.clientStatusResponseService.clientStatusResponse:output_type -> client.server.example.clientStatusResponseMessage
+	0, // 0: client.server.example.ClientStatusResponseService.ClientStatusResponse:input_type -> client.server.example.ClientStatusRequestMessage
+	1, // 1: client.server.example.ClientStatusResponseService.ClientStatusResponse:output_type -> client.server.example.ClientStatusResponseMessage
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

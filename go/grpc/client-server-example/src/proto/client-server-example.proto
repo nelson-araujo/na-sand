@@ -7,7 +7,7 @@ option go_package = "github.com/nelson-araujo/na-sand/go/grpc/client-server-exam
 /* Client Status Request Message
  * 
 */
-message clientStatusRequestMessage {
+message ClientStatusRequestMessage {
   string msg_datetime_utc = 1; // TODO: Convert to google.protobuf.Timestamp
 
   // Client fields
@@ -21,7 +21,7 @@ message clientStatusRequestMessage {
 /* Client Status Response Message
  *
 */
-message clientStatusResponseMessage {
+message ClientStatusResponseMessage {
   string msg_datetime_utc= 1; // TODO: convert to google.protobuf.Timestamp
   
   // Client fields
@@ -48,6 +48,6 @@ message clientStatusResponseMessage {
 /* Client Status Response Sevice
  *
 */
-service clientStatusResponseService {
-  rpc clientStatusResponse(clientStatusRequestMessage) returns(clientStatusResponseMessage);
+service ClientStatusResponseService {
+  rpc ClientStatusResponse(ClientStatusRequestMessage) returns(ClientStatusResponseMessage);
 }
