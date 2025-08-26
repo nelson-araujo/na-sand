@@ -27,6 +27,8 @@ func main (){
 	log.Println("Press CTRL+c to close")
 
 	svr := grpc.NewServer()
+	pb.RegisterClientStatusResponseServiceServer(svr, &Server{})
+
 	if err = svr.Serve(lis); err != nil{
 		log.Fatalf("Failed to server: %v\n", err)
 	}

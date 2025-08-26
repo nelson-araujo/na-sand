@@ -37,14 +37,11 @@ server:
 
 # Compile the client application
 client:
-	go build -o $(BIN_DIR)/client $(CLIENT_FILE)
+	go build -o $(BIN_DIR)/client$(OS) $(CLIENT_FILE)
 
 # Compile all
 all: proto server client
-	#protoc --go_out=$(PROTO_DIR) --go_opt=module=$(MODULE) --go-grpc_out=$(PROTO_DIR) --go-grpc_opt=module=$(MODULE) $(PROTO_FILE)
-	#go build -o $(BIN_DIR)/server $(SERVER_FILE)
-	#go build -o $(BIN_DIR)/client $(CLIENT_FILE)
-	@echo "Generated the proto files along with the server and client binaries"
+	@echo "\nGenerated the proto files and the server and client binaries"
 
 # Delete the generated proto files and delete all files in the bin directory
 clear-all:
