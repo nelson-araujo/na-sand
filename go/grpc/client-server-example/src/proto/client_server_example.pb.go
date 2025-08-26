@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v3.21.12
-// source: proto/client-server-example.proto
+// source: proto/client_server_example.proto
 
 package client_server_example
 
@@ -271,7 +271,7 @@ var File_proto_client_server_example_proto protoreflect.FileDescriptor
 
 const file_proto_client_server_example_proto_rawDesc = "" +
 	"\n" +
-	"!proto/client-server-example.proto\x12\x15client.server.example\"\xbf\x01\n" +
+	"!proto/client_server_example.proto\x12\x15client.server.example\"\xbf\x01\n" +
 	"\x1aClientStatusRequestMessage\x12(\n" +
 	"\x10msg_datetime_utc\x18\x01 \x01(\tR\x0emsgDatetimeUtc\x12*\n" +
 	"\x11get_client_status\x18d \x01(\bR\x0fgetClientStatus\x12)\n" +
