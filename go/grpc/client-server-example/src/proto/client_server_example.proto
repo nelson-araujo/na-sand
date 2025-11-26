@@ -7,47 +7,47 @@ option go_package = "github.com/nelson-araujo/na-sand/go/grpc/client-server-exam
 /* Client Status Request Message
  * 
 */
-message ClientStatusRequestMessage {
-  string msg_datetime_utc = 1; // TODO: Convert to google.protobuf.Timestamp
+message StatusRequestMessage {
+  string MsgDatetimeUtc = 1; // TODO: Convert to google.protobuf.Timestamp
 
   // Client fields
-  bool get_client_status = 100;
+  bool GetClientStatus = 100;
   
   // Device fields
-  bool get_device_satus = 200;
-  string device_name = 201;
+  bool GetDeviceStatus = 200;
+  string DeviceName = 201;
 }
 
 /* Client Status Response Message
  *
 */
-message ClientStatusResponseMessage {
-  string msg_datetime_utc= 1; // TODO: convert to google.protobuf.Timestamp
+message StatusResponseMessage {
+  string MsgDatetimeUtc= 1; // TODO: convert to google.protobuf.Timestamp
   
   // Client fields
-  string client_name = 100;
-  string client_iana_timezone = 101;
-  uint32 client_uptime_minutes = 102;
-  uint32 client_cpu_use = 103;
-  uint32 client_memory_use = 104;
-  uint32 client_disk_use = 105;
-  uint32 client_net_use = 106;
-  repeated string client_status_messages = 107; // Status messages such as warnings and errors
+  string ClientName = 100;
+  string ClientIanaTimezone = 101;
+  uint32 ClientUptimeMinutes = 102;
+  uint32 ClientCpuUse = 103;
+  uint32 Client_MemoryUse = 104;
+  uint32 ClientDiskUse = 105;
+  uint32 ClientNetUse = 106;
+  repeated string ClientStatusMessages = 107; // Status messages such as warnings and errors
 
   // Device fields
-  string device_name = 200;
-  string device_iana_timezone = 201;
-  uint32 device_uptime_minutes = 202;
-  uint32 device_cpu_use = 203;
-  uint32 device_memory_use = 204;
-  uint32 device_disk_use = 205;
-  uint32 device_net_use = 206;
-  repeated string device_status_messages = 207; // Status messages such as warnings and errors
+  string DeviceName = 200;
+  string DeviceIanaTimezone = 201;
+  uint32 DeviceUptimeMinutes = 202;
+  uint32 DeviceCpuUse = 203;
+  uint32 DeviceMemoryUse = 204;
+  uint32 DeviceDiskUse = 205;
+  uint32 DeviceNetUse = 206;
+  repeated string DeviceStatusMessages = 207; // Status messages such as warnings and errors
 }
 
-/* Client Status Response Sevice
+/* Client Status Response Service
  *
 */
-service ClientStatusResponseService {
-  rpc ClientStatusResponse(ClientStatusRequestMessage) returns(ClientStatusResponseMessage);
+service StatusService {
+  rpc StatusResponse(StatusRequestMessage) returns(StatusResponseMessage);
 }

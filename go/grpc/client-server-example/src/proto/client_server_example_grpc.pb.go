@@ -19,106 +19,105 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ClientStatusResponseService_ClientStatusResponse_FullMethodName = "/client.server.example.ClientStatusResponseService/ClientStatusResponse"
+	StatusService_StatusResponse_FullMethodName = "/client.server.example.StatusService/StatusResponse"
 )
 
-// ClientStatusResponseServiceClient is the client API for ClientStatusResponseService service.
+// StatusServiceClient is the client API for StatusService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Client Status Response Sevice
-type ClientStatusResponseServiceClient interface {
-	ClientStatusResponse(ctx context.Context, in *ClientStatusRequestMessage, opts ...grpc.CallOption) (*ClientStatusResponseMessage, error)
+// Client Status Response Service
+type StatusServiceClient interface {
+	StatusResponse(ctx context.Context, in *StatusRequestMessage, opts ...grpc.CallOption) (*StatusResponseMessage, error)
 }
 
-type clientStatusResponseServiceClient struct {
+type statusServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewClientStatusResponseServiceClient(cc grpc.ClientConnInterface) ClientStatusResponseServiceClient {
-	return &clientStatusResponseServiceClient{cc}
+func NewStatusServiceClient(cc grpc.ClientConnInterface) StatusServiceClient {
+	return &statusServiceClient{cc}
 }
 
-func (c *clientStatusResponseServiceClient) ClientStatusResponse(ctx context.Context, in *ClientStatusRequestMessage, opts ...grpc.CallOption) (*ClientStatusResponseMessage, error) {
+func (c *statusServiceClient) StatusResponse(ctx context.Context, in *StatusRequestMessage, opts ...grpc.CallOption) (*StatusResponseMessage, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ClientStatusResponseMessage)
-	err := c.cc.Invoke(ctx, ClientStatusResponseService_ClientStatusResponse_FullMethodName, in, out, cOpts...)
+	out := new(StatusResponseMessage)
+	err := c.cc.Invoke(ctx, StatusService_StatusResponse_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ClientStatusResponseServiceServer is the server API for ClientStatusResponseService service.
-// All implementations must embed UnimplementedClientStatusResponseServiceServer
+// StatusServiceServer is the server API for StatusService service.
+// All implementations must embed UnimplementedStatusServiceServer
 // for forward compatibility.
 //
-// Client Status Response Sevice
-type ClientStatusResponseServiceServer interface {
-	ClientStatusResponse(context.Context, *ClientStatusRequestMessage) (*ClientStatusResponseMessage, error)
-	mustEmbedUnimplementedClientStatusResponseServiceServer()
+// Client Status Response Service
+type StatusServiceServer interface {
+	StatusResponse(context.Context, *StatusRequestMessage) (*StatusResponseMessage, error)
+	mustEmbedUnimplementedStatusServiceServer()
 }
 
-// UnimplementedClientStatusResponseServiceServer must be embedded to have
+// UnimplementedStatusServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedClientStatusResponseServiceServer struct{}
+type UnimplementedStatusServiceServer struct{}
 
-func (UnimplementedClientStatusResponseServiceServer) ClientStatusResponse(context.Context, *ClientStatusRequestMessage) (*ClientStatusResponseMessage, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ClientStatusResponse not implemented")
+func (UnimplementedStatusServiceServer) StatusResponse(context.Context, *StatusRequestMessage) (*StatusResponseMessage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StatusResponse not implemented")
 }
-func (UnimplementedClientStatusResponseServiceServer) mustEmbedUnimplementedClientStatusResponseServiceServer() {
-}
-func (UnimplementedClientStatusResponseServiceServer) testEmbeddedByValue() {}
+func (UnimplementedStatusServiceServer) mustEmbedUnimplementedStatusServiceServer() {}
+func (UnimplementedStatusServiceServer) testEmbeddedByValue()                       {}
 
-// UnsafeClientStatusResponseServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ClientStatusResponseServiceServer will
+// UnsafeStatusServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to StatusServiceServer will
 // result in compilation errors.
-type UnsafeClientStatusResponseServiceServer interface {
-	mustEmbedUnimplementedClientStatusResponseServiceServer()
+type UnsafeStatusServiceServer interface {
+	mustEmbedUnimplementedStatusServiceServer()
 }
 
-func RegisterClientStatusResponseServiceServer(s grpc.ServiceRegistrar, srv ClientStatusResponseServiceServer) {
-	// If the following call pancis, it indicates UnimplementedClientStatusResponseServiceServer was
+func RegisterStatusServiceServer(s grpc.ServiceRegistrar, srv StatusServiceServer) {
+	// If the following call pancis, it indicates UnimplementedStatusServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ClientStatusResponseService_ServiceDesc, srv)
+	s.RegisterService(&StatusService_ServiceDesc, srv)
 }
 
-func _ClientStatusResponseService_ClientStatusResponse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClientStatusRequestMessage)
+func _StatusService_StatusResponse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatusRequestMessage)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClientStatusResponseServiceServer).ClientStatusResponse(ctx, in)
+		return srv.(StatusServiceServer).StatusResponse(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ClientStatusResponseService_ClientStatusResponse_FullMethodName,
+		FullMethod: StatusService_StatusResponse_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientStatusResponseServiceServer).ClientStatusResponse(ctx, req.(*ClientStatusRequestMessage))
+		return srv.(StatusServiceServer).StatusResponse(ctx, req.(*StatusRequestMessage))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ClientStatusResponseService_ServiceDesc is the grpc.ServiceDesc for ClientStatusResponseService service.
+// StatusService_ServiceDesc is the grpc.ServiceDesc for StatusService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ClientStatusResponseService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "client.server.example.ClientStatusResponseService",
-	HandlerType: (*ClientStatusResponseServiceServer)(nil),
+var StatusService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "client.server.example.StatusService",
+	HandlerType: (*StatusServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ClientStatusResponse",
-			Handler:    _ClientStatusResponseService_ClientStatusResponse_Handler,
+			MethodName: "StatusResponse",
+			Handler:    _StatusService_StatusResponse_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

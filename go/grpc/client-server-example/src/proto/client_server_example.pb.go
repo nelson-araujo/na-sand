@@ -22,32 +22,32 @@ const (
 )
 
 // Client Status Request Message
-type ClientStatusRequestMessage struct {
+type StatusRequestMessage struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	MsgDatetimeUtc string                 `protobuf:"bytes,1,opt,name=msg_datetime_utc,json=msgDatetimeUtc,proto3" json:"msg_datetime_utc,omitempty"` // TODO: Convert to google.protobuf.Timestamp
+	MsgDatetimeUtc string                 `protobuf:"bytes,1,opt,name=MsgDatetimeUtc,proto3" json:"MsgDatetimeUtc,omitempty"` // TODO: Convert to google.protobuf.Timestamp
 	// Client fields
-	GetClientStatus bool `protobuf:"varint,100,opt,name=get_client_status,json=getClientStatus,proto3" json:"get_client_status,omitempty"`
+	GetClientStatus bool `protobuf:"varint,100,opt,name=GetClientStatus,proto3" json:"GetClientStatus,omitempty"`
 	// Device fields
-	GetDeviceSatus bool   `protobuf:"varint,200,opt,name=get_device_satus,json=getDeviceSatus,proto3" json:"get_device_satus,omitempty"`
-	DeviceName     string `protobuf:"bytes,201,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	GetDeviceStatus bool   `protobuf:"varint,200,opt,name=GetDeviceStatus,proto3" json:"GetDeviceStatus,omitempty"`
+	DeviceName      string `protobuf:"bytes,201,opt,name=DeviceName,proto3" json:"DeviceName,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *ClientStatusRequestMessage) Reset() {
-	*x = ClientStatusRequestMessage{}
+func (x *StatusRequestMessage) Reset() {
+	*x = StatusRequestMessage{}
 	mi := &file_proto_client_server_example_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClientStatusRequestMessage) String() string {
+func (x *StatusRequestMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClientStatusRequestMessage) ProtoMessage() {}
+func (*StatusRequestMessage) ProtoMessage() {}
 
-func (x *ClientStatusRequestMessage) ProtoReflect() protoreflect.Message {
+func (x *StatusRequestMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_client_server_example_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -59,33 +59,33 @@ func (x *ClientStatusRequestMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClientStatusRequestMessage.ProtoReflect.Descriptor instead.
-func (*ClientStatusRequestMessage) Descriptor() ([]byte, []int) {
+// Deprecated: Use StatusRequestMessage.ProtoReflect.Descriptor instead.
+func (*StatusRequestMessage) Descriptor() ([]byte, []int) {
 	return file_proto_client_server_example_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ClientStatusRequestMessage) GetMsgDatetimeUtc() string {
+func (x *StatusRequestMessage) GetMsgDatetimeUtc() string {
 	if x != nil {
 		return x.MsgDatetimeUtc
 	}
 	return ""
 }
 
-func (x *ClientStatusRequestMessage) GetGetClientStatus() bool {
+func (x *StatusRequestMessage) GetGetClientStatus() bool {
 	if x != nil {
 		return x.GetClientStatus
 	}
 	return false
 }
 
-func (x *ClientStatusRequestMessage) GetGetDeviceSatus() bool {
+func (x *StatusRequestMessage) GetGetDeviceStatus() bool {
 	if x != nil {
-		return x.GetDeviceSatus
+		return x.GetDeviceStatus
 	}
 	return false
 }
 
-func (x *ClientStatusRequestMessage) GetDeviceName() string {
+func (x *StatusRequestMessage) GetDeviceName() string {
 	if x != nil {
 		return x.DeviceName
 	}
@@ -93,45 +93,45 @@ func (x *ClientStatusRequestMessage) GetDeviceName() string {
 }
 
 // Client Status Response Message
-type ClientStatusResponseMessage struct {
+type StatusResponseMessage struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	MsgDatetimeUtc string                 `protobuf:"bytes,1,opt,name=msg_datetime_utc,json=msgDatetimeUtc,proto3" json:"msg_datetime_utc,omitempty"` // TODO: convert to google.protobuf.Timestamp
+	MsgDatetimeUtc string                 `protobuf:"bytes,1,opt,name=MsgDatetimeUtc,proto3" json:"MsgDatetimeUtc,omitempty"` // TODO: convert to google.protobuf.Timestamp
 	// Client fields
-	ClientName           string   `protobuf:"bytes,100,opt,name=client_name,json=clientName,proto3" json:"client_name,omitempty"`
-	ClientIanaTimezone   string   `protobuf:"bytes,101,opt,name=client_iana_timezone,json=clientIanaTimezone,proto3" json:"client_iana_timezone,omitempty"`
-	ClientUptimeMinutes  uint32   `protobuf:"varint,102,opt,name=client_uptime_minutes,json=clientUptimeMinutes,proto3" json:"client_uptime_minutes,omitempty"`
-	ClientCpuUse         uint32   `protobuf:"varint,103,opt,name=client_cpu_use,json=clientCpuUse,proto3" json:"client_cpu_use,omitempty"`
-	ClientMemoryUse      uint32   `protobuf:"varint,104,opt,name=client_memory_use,json=clientMemoryUse,proto3" json:"client_memory_use,omitempty"`
-	ClientDiskUse        uint32   `protobuf:"varint,105,opt,name=client_disk_use,json=clientDiskUse,proto3" json:"client_disk_use,omitempty"`
-	ClientNetUse         uint32   `protobuf:"varint,106,opt,name=client_net_use,json=clientNetUse,proto3" json:"client_net_use,omitempty"`
-	ClientStatusMessages []string `protobuf:"bytes,107,rep,name=client_status_messages,json=clientStatusMessages,proto3" json:"client_status_messages,omitempty"` // Status messages such as warnings and errors
+	ClientName           string   `protobuf:"bytes,100,opt,name=ClientName,proto3" json:"ClientName,omitempty"`
+	ClientIanaTimezone   string   `protobuf:"bytes,101,opt,name=ClientIanaTimezone,proto3" json:"ClientIanaTimezone,omitempty"`
+	ClientUptimeMinutes  uint32   `protobuf:"varint,102,opt,name=ClientUptimeMinutes,proto3" json:"ClientUptimeMinutes,omitempty"`
+	ClientCpuUse         uint32   `protobuf:"varint,103,opt,name=ClientCpuUse,proto3" json:"ClientCpuUse,omitempty"`
+	Client_MemoryUse     uint32   `protobuf:"varint,104,opt,name=Client_MemoryUse,json=ClientMemoryUse,proto3" json:"Client_MemoryUse,omitempty"`
+	ClientDiskUse        uint32   `protobuf:"varint,105,opt,name=ClientDiskUse,proto3" json:"ClientDiskUse,omitempty"`
+	ClientNetUse         uint32   `protobuf:"varint,106,opt,name=ClientNetUse,proto3" json:"ClientNetUse,omitempty"`
+	ClientStatusMessages []string `protobuf:"bytes,107,rep,name=ClientStatusMessages,proto3" json:"ClientStatusMessages,omitempty"` // Status messages such as warnings and errors
 	// Device fields
-	DeviceName           string   `protobuf:"bytes,200,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
-	DeviceIanaTimezone   string   `protobuf:"bytes,201,opt,name=device_iana_timezone,json=deviceIanaTimezone,proto3" json:"device_iana_timezone,omitempty"`
-	DeviceUptimeMinutes  uint32   `protobuf:"varint,202,opt,name=device_uptime_minutes,json=deviceUptimeMinutes,proto3" json:"device_uptime_minutes,omitempty"`
-	DeviceCpuUse         uint32   `protobuf:"varint,203,opt,name=device_cpu_use,json=deviceCpuUse,proto3" json:"device_cpu_use,omitempty"`
-	DeviceMemoryUse      uint32   `protobuf:"varint,204,opt,name=device_memory_use,json=deviceMemoryUse,proto3" json:"device_memory_use,omitempty"`
-	DeviceDiskUse        uint32   `protobuf:"varint,205,opt,name=device_disk_use,json=deviceDiskUse,proto3" json:"device_disk_use,omitempty"`
-	DeviceNetUse         uint32   `protobuf:"varint,206,opt,name=device_net_use,json=deviceNetUse,proto3" json:"device_net_use,omitempty"`
-	DeviceStatusMessages []string `protobuf:"bytes,207,rep,name=device_status_messages,json=deviceStatusMessages,proto3" json:"device_status_messages,omitempty"` // Status messages such as warnings and errors
+	DeviceName           string   `protobuf:"bytes,200,opt,name=DeviceName,proto3" json:"DeviceName,omitempty"`
+	DeviceIanaTimezone   string   `protobuf:"bytes,201,opt,name=DeviceIanaTimezone,proto3" json:"DeviceIanaTimezone,omitempty"`
+	DeviceUptimeMinutes  uint32   `protobuf:"varint,202,opt,name=DeviceUptimeMinutes,proto3" json:"DeviceUptimeMinutes,omitempty"`
+	DeviceCpuUse         uint32   `protobuf:"varint,203,opt,name=DeviceCpuUse,proto3" json:"DeviceCpuUse,omitempty"`
+	DeviceMemoryUse      uint32   `protobuf:"varint,204,opt,name=DeviceMemoryUse,proto3" json:"DeviceMemoryUse,omitempty"`
+	DeviceDiskUse        uint32   `protobuf:"varint,205,opt,name=DeviceDiskUse,proto3" json:"DeviceDiskUse,omitempty"`
+	DeviceNetUse         uint32   `protobuf:"varint,206,opt,name=DeviceNetUse,proto3" json:"DeviceNetUse,omitempty"`
+	DeviceStatusMessages []string `protobuf:"bytes,207,rep,name=DeviceStatusMessages,proto3" json:"DeviceStatusMessages,omitempty"` // Status messages such as warnings and errors
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
 
-func (x *ClientStatusResponseMessage) Reset() {
-	*x = ClientStatusResponseMessage{}
+func (x *StatusResponseMessage) Reset() {
+	*x = StatusResponseMessage{}
 	mi := &file_proto_client_server_example_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClientStatusResponseMessage) String() string {
+func (x *StatusResponseMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClientStatusResponseMessage) ProtoMessage() {}
+func (*StatusResponseMessage) ProtoMessage() {}
 
-func (x *ClientStatusResponseMessage) ProtoReflect() protoreflect.Message {
+func (x *StatusResponseMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_client_server_example_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -143,124 +143,124 @@ func (x *ClientStatusResponseMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClientStatusResponseMessage.ProtoReflect.Descriptor instead.
-func (*ClientStatusResponseMessage) Descriptor() ([]byte, []int) {
+// Deprecated: Use StatusResponseMessage.ProtoReflect.Descriptor instead.
+func (*StatusResponseMessage) Descriptor() ([]byte, []int) {
 	return file_proto_client_server_example_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ClientStatusResponseMessage) GetMsgDatetimeUtc() string {
+func (x *StatusResponseMessage) GetMsgDatetimeUtc() string {
 	if x != nil {
 		return x.MsgDatetimeUtc
 	}
 	return ""
 }
 
-func (x *ClientStatusResponseMessage) GetClientName() string {
+func (x *StatusResponseMessage) GetClientName() string {
 	if x != nil {
 		return x.ClientName
 	}
 	return ""
 }
 
-func (x *ClientStatusResponseMessage) GetClientIanaTimezone() string {
+func (x *StatusResponseMessage) GetClientIanaTimezone() string {
 	if x != nil {
 		return x.ClientIanaTimezone
 	}
 	return ""
 }
 
-func (x *ClientStatusResponseMessage) GetClientUptimeMinutes() uint32 {
+func (x *StatusResponseMessage) GetClientUptimeMinutes() uint32 {
 	if x != nil {
 		return x.ClientUptimeMinutes
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetClientCpuUse() uint32 {
+func (x *StatusResponseMessage) GetClientCpuUse() uint32 {
 	if x != nil {
 		return x.ClientCpuUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetClientMemoryUse() uint32 {
+func (x *StatusResponseMessage) GetClient_MemoryUse() uint32 {
 	if x != nil {
-		return x.ClientMemoryUse
+		return x.Client_MemoryUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetClientDiskUse() uint32 {
+func (x *StatusResponseMessage) GetClientDiskUse() uint32 {
 	if x != nil {
 		return x.ClientDiskUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetClientNetUse() uint32 {
+func (x *StatusResponseMessage) GetClientNetUse() uint32 {
 	if x != nil {
 		return x.ClientNetUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetClientStatusMessages() []string {
+func (x *StatusResponseMessage) GetClientStatusMessages() []string {
 	if x != nil {
 		return x.ClientStatusMessages
 	}
 	return nil
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceName() string {
+func (x *StatusResponseMessage) GetDeviceName() string {
 	if x != nil {
 		return x.DeviceName
 	}
 	return ""
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceIanaTimezone() string {
+func (x *StatusResponseMessage) GetDeviceIanaTimezone() string {
 	if x != nil {
 		return x.DeviceIanaTimezone
 	}
 	return ""
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceUptimeMinutes() uint32 {
+func (x *StatusResponseMessage) GetDeviceUptimeMinutes() uint32 {
 	if x != nil {
 		return x.DeviceUptimeMinutes
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceCpuUse() uint32 {
+func (x *StatusResponseMessage) GetDeviceCpuUse() uint32 {
 	if x != nil {
 		return x.DeviceCpuUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceMemoryUse() uint32 {
+func (x *StatusResponseMessage) GetDeviceMemoryUse() uint32 {
 	if x != nil {
 		return x.DeviceMemoryUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceDiskUse() uint32 {
+func (x *StatusResponseMessage) GetDeviceDiskUse() uint32 {
 	if x != nil {
 		return x.DeviceDiskUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceNetUse() uint32 {
+func (x *StatusResponseMessage) GetDeviceNetUse() uint32 {
 	if x != nil {
 		return x.DeviceNetUse
 	}
 	return 0
 }
 
-func (x *ClientStatusResponseMessage) GetDeviceStatusMessages() []string {
+func (x *StatusResponseMessage) GetDeviceStatusMessages() []string {
 	if x != nil {
 		return x.DeviceStatusMessages
 	}
@@ -271,35 +271,38 @@ var File_proto_client_server_example_proto protoreflect.FileDescriptor
 
 const file_proto_client_server_example_proto_rawDesc = "" +
 	"\n" +
-	"!proto/client_server_example.proto\x12\x15client.server.example\"\xbf\x01\n" +
-	"\x1aClientStatusRequestMessage\x12(\n" +
-	"\x10msg_datetime_utc\x18\x01 \x01(\tR\x0emsgDatetimeUtc\x12*\n" +
-	"\x11get_client_status\x18d \x01(\bR\x0fgetClientStatus\x12)\n" +
-	"\x10get_device_satus\x18\xc8\x01 \x01(\bR\x0egetDeviceSatus\x12 \n" +
-	"\vdevice_name\x18\xc9\x01 \x01(\tR\n" +
-	"deviceName\"\x89\x06\n" +
-	"\x1bClientStatusResponseMessage\x12(\n" +
-	"\x10msg_datetime_utc\x18\x01 \x01(\tR\x0emsgDatetimeUtc\x12\x1f\n" +
-	"\vclient_name\x18d \x01(\tR\n" +
-	"clientName\x120\n" +
-	"\x14client_iana_timezone\x18e \x01(\tR\x12clientIanaTimezone\x122\n" +
-	"\x15client_uptime_minutes\x18f \x01(\rR\x13clientUptimeMinutes\x12$\n" +
-	"\x0eclient_cpu_use\x18g \x01(\rR\fclientCpuUse\x12*\n" +
-	"\x11client_memory_use\x18h \x01(\rR\x0fclientMemoryUse\x12&\n" +
-	"\x0fclient_disk_use\x18i \x01(\rR\rclientDiskUse\x12$\n" +
-	"\x0eclient_net_use\x18j \x01(\rR\fclientNetUse\x124\n" +
-	"\x16client_status_messages\x18k \x03(\tR\x14clientStatusMessages\x12 \n" +
-	"\vdevice_name\x18\xc8\x01 \x01(\tR\n" +
-	"deviceName\x121\n" +
-	"\x14device_iana_timezone\x18\xc9\x01 \x01(\tR\x12deviceIanaTimezone\x123\n" +
-	"\x15device_uptime_minutes\x18\xca\x01 \x01(\rR\x13deviceUptimeMinutes\x12%\n" +
-	"\x0edevice_cpu_use\x18\xcb\x01 \x01(\rR\fdeviceCpuUse\x12+\n" +
-	"\x11device_memory_use\x18\xcc\x01 \x01(\rR\x0fdeviceMemoryUse\x12'\n" +
-	"\x0fdevice_disk_use\x18\xcd\x01 \x01(\rR\rdeviceDiskUse\x12%\n" +
-	"\x0edevice_net_use\x18\xce\x01 \x01(\rR\fdeviceNetUse\x125\n" +
-	"\x16device_status_messages\x18\xcf\x01 \x03(\tR\x14deviceStatusMessages2\x9c\x01\n" +
-	"\x1bClientStatusResponseService\x12}\n" +
-	"\x14ClientStatusResponse\x121.client.server.example.ClientStatusRequestMessage\x1a2.client.server.example.ClientStatusResponseMessageB@Z>github.com/nelson-araujo/na-sand/go/grpc/client-server-exampleb\x06proto3"
+	"!proto/client_server_example.proto\x12\x15client.server.example\"\xb4\x01\n" +
+	"\x14StatusRequestMessage\x12&\n" +
+	"\x0eMsgDatetimeUtc\x18\x01 \x01(\tR\x0eMsgDatetimeUtc\x12(\n" +
+	"\x0fGetClientStatus\x18d \x01(\bR\x0fGetClientStatus\x12)\n" +
+	"\x0fGetDeviceStatus\x18\xc8\x01 \x01(\bR\x0fGetDeviceStatus\x12\x1f\n" +
+	"\n" +
+	"DeviceName\x18\xc9\x01 \x01(\tR\n" +
+	"DeviceName\"\xe4\x05\n" +
+	"\x15StatusResponseMessage\x12&\n" +
+	"\x0eMsgDatetimeUtc\x18\x01 \x01(\tR\x0eMsgDatetimeUtc\x12\x1e\n" +
+	"\n" +
+	"ClientName\x18d \x01(\tR\n" +
+	"ClientName\x12.\n" +
+	"\x12ClientIanaTimezone\x18e \x01(\tR\x12ClientIanaTimezone\x120\n" +
+	"\x13ClientUptimeMinutes\x18f \x01(\rR\x13ClientUptimeMinutes\x12\"\n" +
+	"\fClientCpuUse\x18g \x01(\rR\fClientCpuUse\x12)\n" +
+	"\x10Client_MemoryUse\x18h \x01(\rR\x0fClientMemoryUse\x12$\n" +
+	"\rClientDiskUse\x18i \x01(\rR\rClientDiskUse\x12\"\n" +
+	"\fClientNetUse\x18j \x01(\rR\fClientNetUse\x122\n" +
+	"\x14ClientStatusMessages\x18k \x03(\tR\x14ClientStatusMessages\x12\x1f\n" +
+	"\n" +
+	"DeviceName\x18\xc8\x01 \x01(\tR\n" +
+	"DeviceName\x12/\n" +
+	"\x12DeviceIanaTimezone\x18\xc9\x01 \x01(\tR\x12DeviceIanaTimezone\x121\n" +
+	"\x13DeviceUptimeMinutes\x18\xca\x01 \x01(\rR\x13DeviceUptimeMinutes\x12#\n" +
+	"\fDeviceCpuUse\x18\xcb\x01 \x01(\rR\fDeviceCpuUse\x12)\n" +
+	"\x0fDeviceMemoryUse\x18\xcc\x01 \x01(\rR\x0fDeviceMemoryUse\x12%\n" +
+	"\rDeviceDiskUse\x18\xcd\x01 \x01(\rR\rDeviceDiskUse\x12#\n" +
+	"\fDeviceNetUse\x18\xce\x01 \x01(\rR\fDeviceNetUse\x123\n" +
+	"\x14DeviceStatusMessages\x18\xcf\x01 \x03(\tR\x14DeviceStatusMessages2|\n" +
+	"\rStatusService\x12k\n" +
+	"\x0eStatusResponse\x12+.client.server.example.StatusRequestMessage\x1a,.client.server.example.StatusResponseMessageB@Z>github.com/nelson-araujo/na-sand/go/grpc/client-server-exampleb\x06proto3"
 
 var (
 	file_proto_client_server_example_proto_rawDescOnce sync.Once
@@ -315,12 +318,12 @@ func file_proto_client_server_example_proto_rawDescGZIP() []byte {
 
 var file_proto_client_server_example_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_client_server_example_proto_goTypes = []any{
-	(*ClientStatusRequestMessage)(nil),  // 0: client.server.example.ClientStatusRequestMessage
-	(*ClientStatusResponseMessage)(nil), // 1: client.server.example.ClientStatusResponseMessage
+	(*StatusRequestMessage)(nil),  // 0: client.server.example.StatusRequestMessage
+	(*StatusResponseMessage)(nil), // 1: client.server.example.StatusResponseMessage
 }
 var file_proto_client_server_example_proto_depIdxs = []int32{
-	0, // 0: client.server.example.ClientStatusResponseService.ClientStatusResponse:input_type -> client.server.example.ClientStatusRequestMessage
-	1, // 1: client.server.example.ClientStatusResponseService.ClientStatusResponse:output_type -> client.server.example.ClientStatusResponseMessage
+	0, // 0: client.server.example.StatusService.StatusResponse:input_type -> client.server.example.StatusRequestMessage
+	1, // 1: client.server.example.StatusService.StatusResponse:output_type -> client.server.example.StatusResponseMessage
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
