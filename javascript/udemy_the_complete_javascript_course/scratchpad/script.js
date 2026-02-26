@@ -56,43 +56,69 @@
 
 // Functions
 // Basic function declaration
-const number1 = 10;
-const number2 = 20;
+// const number1 = 10;
+// const number2 = 20;
+//
+// function sum(num1, num2) {
+//   console.log(`My first function`);
+//
+//   const sum = num1 + num2;
+//
+//   return sum;
+// }
+//
+// const result = sum(number1, number2);
+// console.log(`Sum of ${number1} and ${number2} is ${result}.`);
+//
+// // function declaration
+// function calcAge1(birthYear) {
+//   return 2037 - birthYear;
+// }
+//
+// //function expression
+// const calcAge2 = function (birthYear) {
+//   return 2037 - birthYear;
+// };
+//
+// // Arrow function
+// const calcAge3 = (birthYear) => 2037 - birthYear;
+//
+// // More complext arrow function
+// const yearsUntilRetirement = (birthYear, firstName) => {
+//   const age = 2037 - birthYear;
+//   const retirement = 65 - age;
+//   return `${firstName} retires in ${retirement} years!`;
+// };
+//
+// const age1 = calcAge1(1991);
+// const age2 = calcAge2(1991);
+// const age3 = calcAge3(1991);
+//
+// console.log(`age1: ${age1}\nage2: ${age2}\nage3: ${age3}`);
+// console.log(yearsUntilRetirement(1980, "Nelson"));
 
-function sum(num1, num2) {
-  console.log(`My first function`);
+// Arrays
+// simple declaration
+const daysOfWeekend = ["Saturday", "Sunday"];
+console.log(`${daysOfWeekend}`);
 
-  const sum = num1 + num2;
+const daysOfWorkWeek = new Array(
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+);
+console.log(`${daysOfWorkWeek}`);
 
-  return sum;
-}
+// Update an array
+daysOfWeekend[0] = "Sat";
+daysOfWeekend[1] = "Sun";
 
-const result = sum(number1, number2);
-console.log(`Sum of ${number1} and ${number2} is ${result}.`);
+console.log(
+  `${daysOfWorkWeek[0]} is the first day of the ${daysOfWorkWeek.length} work week`,
+);
 
-// function declaration
-function calcAge1(birthYear) {
-  return 2037 - birthYear;
-}
-
-//function expression
-const calcAge2 = function (birthYear) {
-  return 2037 - birthYear;
-};
-
-// Arrow function
-const calcAge3 = (birthYear) => 2037 - birthYear;
-
-// More complext arrow function
-const yearsUntilRetirement = (birthYear, firstName) => {
-  const age = 2037 - birthYear;
-  const retirement = 65 - age;
-  return `${firstName} retires in ${retirement} years!`;
-};
-
-const age1 = calcAge1(1991);
-const age2 = calcAge2(1991);
-const age3 = calcAge3(1991);
-
-console.log(`age1: ${age1}\nage2: ${age2}\nage3: ${age3}`);
-console.log(yearsUntilRetirement(1980, "Nelson"));
+// Array inside another array
+const daysOfTheWeek = [daysOfWorkWeek, daysOfWeekend];
+console.log(`${daysOfTheWeek}`);
