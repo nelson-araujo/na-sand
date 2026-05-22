@@ -1,0 +1,4 @@
+    Updating crates.io index
+error: no matching package named `rp235-hal` found
+location searched: crates.io index
+required by package `blinky v0.1.0 (/home/na/repos/na-sand/rust-embedded/digikey-series-raspberry-pi/apps/blinky)`
